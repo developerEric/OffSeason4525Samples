@@ -1,8 +1,10 @@
 
 package org.usfirst.frc.team4525.robot.subsystems;
 
-import java.awt.Robot;
+//import java.awt.Robot;
+
 import org.usfirst.frc.team4525.robot.RobotMap;
+import org.usfirst.frc.team4525.robot.commands.XboxControllerDrive;
 
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -37,7 +39,7 @@ public class DriveTrain extends Subsystem {
 	}
 	
     public void initDefaultCommand() {
-    	
+    	setDefaultCommand(new XboxControllerDrive());
     }
     
     private boolean isDeadband(double raw, AxisType axis) {
@@ -49,7 +51,6 @@ public class DriveTrain extends Subsystem {
     	}
     	return false;
     }
-
 
 	public void arcadeDrive(double power, double offset) {
 		double leftSpeed, rightSpeed;

@@ -12,7 +12,7 @@ public class XboxControllerDrive extends Command {
 
     public XboxControllerDrive() {
         // Use requires() here to declare subsystem dependencies
-        requires(drive);
+        requires(Robot.drive);
     }
 
     // Called just before this Command runs the first time
@@ -21,7 +21,7 @@ public class XboxControllerDrive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	drive.arcadeDrive();
+    	Robot.drive.arcadeDrive(0,0); // TODO
     }
 
     // Make this return true when this Command no longer needs to run execute()
