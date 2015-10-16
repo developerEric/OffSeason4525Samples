@@ -7,12 +7,21 @@ package org.usfirst.frc.team4525.robot;
  */
 public class RobotMap {
 	// SYSTEM CONTROL SETTINGS ------------------>
+	// DRIVE SETTINGS
+	
+	public final static int driveForwardBackward = XboxController.Axis.LeftY.get();
+	public final static int driveLeftRight = XboxController.Axis.RightX.get();
+	
 	// Xbox Controller Sensitivity
 	public final static double controllerDeadband = 0.05,
 					robotRotationDeadband = 0.025;
-
+	
 	// Speed Settings
 	public final static double rotationSpeedMax = 0.75;
+	public final static double notSprintSpeedCap = 0.8;
+	
+	// Controls Inverted
+	public final static boolean controlsInvertXY = true;
 	
 	// PWM to RIO ------------------>
 	// Motors
@@ -29,5 +38,4 @@ public class RobotMap {
 	// Encoders
 	public final int encoderSignalA = 0,
 				encoderSignalB = 1;
-	
 }

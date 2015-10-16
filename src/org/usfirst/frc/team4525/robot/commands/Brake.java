@@ -1,17 +1,16 @@
 
 package org.usfirst.frc.team4525.robot.commands;
+
 import edu.wpi.first.wpilibj.command.Command;
 
-import org.usfirst.frc.team4525.robot.OI;
 import org.usfirst.frc.team4525.robot.Robot;
-import org.usfirst.frc.team4525.robot.RobotMap;
 
 /**
  *
  */
-public class XboxControllerDrive extends Command {
-	
-    public XboxControllerDrive() {
+public class Brake extends Command {
+
+    public Brake() {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.drive);
     }
@@ -21,9 +20,8 @@ public class XboxControllerDrive extends Command {
     }
 
     // Called repeatedly when this Command is scheduled to run
-    
     protected void execute() {
-    	Robot.drive.arcadeDrive(OI.getDriveStickAxis(RobotMap.driveForwardBackward), OI.getDriveStickAxis(RobotMap.driveLeftRight));
+    	Robot.drive.setBrake(true);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -33,6 +31,7 @@ public class XboxControllerDrive extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.drive.setBrake(false);
     }
 
     // Called when another command which requires one or more of the same

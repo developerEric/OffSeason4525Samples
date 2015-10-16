@@ -16,9 +16,15 @@ public class DriveTrain extends Subsystem {
 
 	private Victor l1,l2,
 				r1,r2;
+	// Inversions
 	
 	// Are we having two or four motors?!?
 	private boolean quadMotorDrive = false;
+	
+	// System Variables;
+	
+	private boolean sprint = false;
+	private boolean brakes = false;
 	
 	// Axis'
 	public enum AxisType {
@@ -54,15 +60,20 @@ public class DriveTrain extends Subsystem {
 
 	public void arcadeDrive(double power, double offset) {
 		double leftSpeed, rightSpeed;
+		
 		// Check for deadbands
 		if(isDeadband(power, AxisType.Y_UpDown)) power = 0;
 		if(isDeadband(offset, AxisType.X_LeftRight)) offset = 0;
 		
-		/* Make the controller coorispondant to the direction of motors:
-		 * The controler is inverted anyways, so...
+		if(!sprint) power = power*RobotMap.notSprintSpeedCap;
+		
+		/* Make the controller corispondent to the direction of motors:
+		 * The controller is inverted anyways, so...
 		 */
-		power = power*-1;
-		offset = offset*-1;
+		if (RobotMap.controlsInvertXY) {
+			power = power*-1;
+			offset = offset*-1;
+		}
 		
 		// Calculate Left/Right motor power values:
 		if (power > 0) {
@@ -92,14 +103,21 @@ public class DriveTrain extends Subsystem {
 	}
 	
 	private void setLeft(double value) {
+		if(brakes) value = 0;
 		l1.set(value);
 		if(quadMotorDrive)  l2.set(value);
 	}
 
 	private void setRight(double value) {
+		if(brakes) value = 0;
 		r1.set(value);
 		if(quadMotorDrive)  r2.set(value);
 	}
 	
+	// OTHER METHODS
+	
+	public void setBrake(boolean apply) {
+		brakes = apply;
+	}
 }
 
